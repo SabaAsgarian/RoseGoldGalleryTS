@@ -1,0 +1,80 @@
+/* Admin Register Page Styles */
+.admin-register-container {
+  background-color: #f2f4f8;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0;
+}
+
+.admin-register-form-container {
+  background-color: #ffffff;
+  padding: 2rem 3rem;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  max-width: 500px;
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .admin-register-form-container {
+    padding: 2rem;
+  }
+}
+
+.admin-register-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: black;
+  text-align: center;
+}
+
+.admin-register-form {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.admin-register-field {
+  width: 100%;
+}
+
+.admin-register-button {
+  background-color: #a9dfd8;
+  color: black;
+  font-weight: bold;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.admin-register-button:hover {
+  background-color: #8fcfc8;
+}
+
+.admin-register-link-section {
+  display: flex;
+  align-items: center;
+  margin-top: 1.5rem;
+  gap: 0.5rem;
+}
+
+.admin-register-main-site-link {
+  width: 100%;
+  max-width: 400px;
+  margin-top: 2rem;
+}
+

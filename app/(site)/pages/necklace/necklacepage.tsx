@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import MultiActionAreaCard from "../../../components/CardOfPages";
-import brace from "../../../../public/img/bacelettop.jpg";
+import neck from "../../../../public/img/necklacetop.webp";
 import Image from "next/image";
 import useStore from "../../../store";
 import { Box } from "@mui/material";
@@ -98,7 +98,7 @@ const NecklacePage: React.FC = () => {
       {/* 🖼️ Top Image */}
       <div style={{ display: "flex", justifyContent: "center", marginBottom: "3%" }}>
         <div style={{ position: "relative", width: "100%", height: "230px" }}>
-          <Image src={brace} alt="Necklace" fill style={{ objectFit: "cover" }} priority />
+          <Image src={neck} alt="Necklace" fill style={{ objectFit: "cover" }} priority />
         </div>
       </div>
 

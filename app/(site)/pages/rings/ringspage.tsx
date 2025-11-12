@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import MultiActionAreaCard from "../../../components/CardOfPages";
-import brace from "../../../../public/img/bacelettop.jpg";
+import ringss from "../../../../public/img/ringstop.jpg";
 import Image from "next/image";
 import useStore from "../../../store";
 import { Box } from "@mui/material";
@@ -97,8 +97,8 @@ const RingsPage: React.FC = () => {
 
       {/* 🖼️ Top Image */}
       <div style={{ display: "flex", justifyContent: "center", marginBottom: "3%" }}>
-        <div style={{ position: "relative", width: "100%", height: "230px" }}>
-          <Image src={brace} alt="Rings" fill style={{ objectFit: "cover" }} priority />
+        <div style={{ position: "relative", width: "100%", height: "300px" }}>
+          <Image src={ringss} alt="Rings" fill style={{ objectFit: "cover" }} priority />
         </div>
       </div>
 

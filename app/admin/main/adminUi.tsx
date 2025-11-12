@@ -1,6 +1,6 @@
 // @/components/admin/ResponsiveDrawer.tsx
 "use client"
-import React, { useState, useCallback, useMemo, ReactNode } from 'react';
+import React, { useState, useCallback, useMemo, ReactNode, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import PropTypes from 'prop-types';
 import { ThemeProvider, createTheme, styled, alpha, Theme } from '@mui/material/styles';
@@ -172,14 +172,34 @@ function ResponsiveDrawer(props: ResponsiveDrawerProps) {
     }
   }, [router, mobileOpen, handleDrawerClose]);
 
+  // Redirect to /admin if not authenticated while this UI is mounted
+  useEffect(() => {
+    if (typeof globalThis === 'undefined') return;
+    try {
+      const token = globalThis.localStorage?.getItem('token');
+      const user = globalThis.localStorage?.getItem('user');
+      if (!token || !user) {
+        router.replace('/admin');
+      }
+    } catch {
+      router.replace('/admin');
+    }
+  }, [router]);
+
   // Logout function
   const handleLogout = useCallback(() => {
     if (typeof window !== 'undefined') {
-      localStorage.clear();
-      localStorage.removeItem("adminToken");
-      localStorage.removeItem("userRole");
+      try {
+        localStorage.clear();
+      } catch {}
     }
-    router.push("/admin");
+    setSelectedItem('');
+    // Hard redirect to avoid any stale client-side state pushing back to orders
+    if (typeof globalThis !== 'undefined' && 'location' in globalThis) {
+      (globalThis as any).location.replace('/admin?loggedout=1');
+    } else {
+      router.replace('/admin?loggedout=1');
+    }
   }, [router]);
 
   // Menu items typed as MenuItemType[]

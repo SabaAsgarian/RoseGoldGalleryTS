@@ -13,7 +13,7 @@ import {
   Backdrop,
   CircularProgress
 } from '@mui/material';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Link from 'next/link';
@@ -71,11 +71,21 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://rosegoldgallery
 
 function AdminLoginPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [showpass, setShowpass] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const showic = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // If we came from an explicit logout, hard-clear any stale storage and do NOT redirect
+    const loggedOutFlag = searchParams.get('loggedout');
+    if (loggedOutFlag === '1') {
+      try {
+        localStorage.clear();
+      } catch {}
+      return;
+    }
+
     const token = localStorage.getItem('token');
     const tokenExpiration = localStorage.getItem('tokenExpiration');
 
@@ -102,7 +112,7 @@ function AdminLoginPage() {
         router.push('/admin');
       }
     }
-  }, [router]);
+  }, [router, searchParams]);
 
   const formik = useFormik({
     initialValues: {

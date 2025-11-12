@@ -1,12 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
-import Slider from "react-slick";
+import dynamic from "next/dynamic";
+import React, { useState, useEffect } from "react";
 import Image, { StaticImageData } from "next/image";
 import { IconButton } from "@mui/material";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-
 
 // Import images
 import a from "../../public/img/washington-Park-Mall.jpg";
@@ -16,7 +15,10 @@ import d from "../../public/img/losvegas.jpg";
 import e from "../../public/img/chicago-Water-Tower-061014-0196_54_990x660.webp";
 import f from "../../public/img/arizona.webp";
 
-// Define props for custom arrows
+// Dynamically import react-slick (SSR disabled)
+const Slider = dynamic(() => import("react-slick"), { ssr: false });
+
+// Arrow props
 interface ArrowProps {
   onClick?: () => void;
   isHovering: boolean;
@@ -73,77 +75,61 @@ const SamplePrevArrow: React.FC<ArrowProps> = ({ onClick, isHovering }) => (
 );
 
 const ResponsiveSlider: React.FC = () => {
-  const [isHovering, setIsHovering] = useState<boolean>(false);
-
+  const [isHovering, setIsHovering] = useState(false);
+  const [slidesToShow, setSlidesToShow] = useState(5); // default (desktop)
+  const [isMounted, setIsMounted] = useState(false);
   const images: StaticImageData[] = [a, b, c, d, e, f];
+
+  // Detect screen width on client
+  useEffect(() => {
+    const updateSlides = () => {
+      const width = window.innerWidth;
+      if (width <= 480) setSlidesToShow(1);
+      else if (width <= 768) setSlidesToShow(2);
+      else if (width <= 1024) setSlidesToShow(3);
+      else setSlidesToShow(5);
+    };
+
+    updateSlides(); // Run once on mount
+    window.addEventListener("resize", updateSlides);
+    setIsMounted(true);
+
+    return () => window.removeEventListener("resize", updateSlides);
+  }, []);
+
+  if (!isMounted) return null; // prevents SSR mismatch
 
   const settings = {
     dots: false,
     infinite: false,
     speed: 500,
-    slidesToShow: 5,
-    slidesToScroll: 5,
-    initialSlide: 0,
+    slidesToShow,
+    slidesToScroll: slidesToShow,
     nextArrow: <SampleNextArrow isHovering={isHovering} />,
     prevArrow: <SamplePrevArrow isHovering={isHovering} />,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: false,
-          nextArrow: <SampleNextArrow isHovering={isHovering} />,
-          prevArrow: <SamplePrevArrow isHovering={isHovering} />,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-          dots: false,
-          nextArrow: <SampleNextArrow isHovering={isHovering} />,
-          prevArrow: <SamplePrevArrow isHovering={isHovering} />,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          dots: false,
-          nextArrow: <SampleNextArrow isHovering={isHovering} />,
-          prevArrow: <SamplePrevArrow isHovering={isHovering} />,
-        },
-      },
-    ],
   };
 
   return (
     <div
       className="slider-hover-wrapper"
-      style={{ position: "relative", width: "100%",marginBottom:"100px" }}
+      style={{ position: "relative", width: "100%", marginBottom: "100px" }}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
     >
       <Slider {...settings}>
         {images.map((imgSrc, index) => (
           <div key={index}>
-        
             <Image
               src={imgSrc}
               alt={`img-${index}`}
               className="image-hover2"
               style={{
                 objectFit: "cover",
-                width: "95%",
-                height: "250px",
+                width: "100%",
+                height: "100%",
+                padding: "0 10px",
               }}
             />
-        
           </div>
         ))}
       </Slider>

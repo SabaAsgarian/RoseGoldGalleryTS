@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -10,10 +9,11 @@ import Link from "next/link";
 import { IconButton } from "@mui/material";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import '../globals.css'
+import "../globals.css";
+
 // --- IMAGES ---
 import a from "../../public/img/1.jpg";
-import b from "../../public/img/2.jpg"
+import b from "../../public/img/2.jpg";
 import c from "../../public/img/3.jpg";
 import d from "../../public/img/4.jpg";
 import e from "../../public/img/5.jpg";
@@ -25,8 +25,6 @@ import j from "../../public/img/10.jpg";
 import k from "../../public/img/11.jpg";
 import l from "../../public/img/neck.jpg";
 import m from "../../public/img/13.jpg";
-
-
 
 // ---------- Types ----------
 interface ArrowProps {
@@ -90,6 +88,15 @@ const SamplePrevArrow: React.FC<ArrowProps> = ({ onClick, isHovering }) => (
 // ---------- Slider Component ----------
 const ReactSlick: React.FC = () => {
   const [isHovering, setIsHovering] = useState(false);
+  const [windowWidth, setWindowWidth] = useState<number>(0);
+
+  // ✅ برای درست ماندن وضعیت بعد از رفرش
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    handleResize(); // run on mount
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     const sliderContainer = document.querySelector(".slider-container");
@@ -127,59 +134,40 @@ const ReactSlick: React.FC = () => {
     dots: true,
     infinite: false,
     speed: 500,
-    slidesToShow: 5,
-    slidesToScroll: 5,
+    slidesToShow:
+      windowWidth >= 1024 ? 5 : windowWidth >= 600 ? 3 : windowWidth >= 480 ? 2 : 1,
+    slidesToScroll:
+      windowWidth >= 1024 ? 5 : windowWidth >= 600 ? 3 : windowWidth >= 480 ? 2 : 1,
     nextArrow: <SampleNextArrow isHovering={isHovering} />,
     prevArrow: <SamplePrevArrow isHovering={isHovering} />,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
+    adaptiveHeight: true,
   };
 
   return (
-    <div className="slider-container" style={{ position: "relative",padding: "0 10px" }}>
-      <Slider {...settings}>
+    <div className="slider-container" style={{ position: "relative", padding: "0 10px" }}>
+     <Slider key={windowWidth} {...(settings as any)}>
         {slides.map((slide, index) => (
-          <div key={index} className="bg-white mix-blend-multiply " style={{margin: "0 10px" }}>
-          <div key={index} className="bg-[#faf7f1] mix-blend-multiply " style={{margin: "0 10px" }}>
-            <Link href={slide.link} passHref>
-              <Image
-                src={slide.img}
-                alt={`slide-${index}`}
-                className="image-hover"
-                style={{
-                  height: "80%",
-                  backgroundColor: "#faf7f1",
-                  mixBlendMode: "multiply",
-                  width: "100%",
-               
-                }}
-                placeholder="blur"
-              />
-            </Link>
-          </div>
+          <div key={index} className="bg-white mix-blend-multiply" style={{ margin: "0 10px" }}>
+            <div
+              key={`inner-${index}`}
+              className="bg-[#faf7f1] mix-blend-multiply"
+              style={{ margin: "0 10px" }}
+            >
+              <Link href={slide.link} passHref>
+                <Image
+                  src={slide.img}
+                  alt={`slide-${index}`}
+                  className="image-hover"
+                  style={{
+                    height: "80%",
+                    backgroundColor: "#faf7f1",
+                    mixBlendMode: "multiply",
+                    width: "100%",
+                  }}
+                  placeholder="blur"
+                />
+              </Link>
+            </div>
           </div>
         ))}
       </Slider>

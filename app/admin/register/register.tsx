@@ -3,8 +3,8 @@ import React, { useRef, useState, useCallback } from "react";
 import { useFormik } from "formik";
 import { useRouter } from "next/navigation";
 import { styled } from '@mui/material/styles';
-import { TextField, Button, Box, Container, Typography, IconButton } from '@mui/material'; 
-import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import { TextField, Button, Box, Container, Typography, IconButton } from '@mui/material';
+
 import Link from "next/link";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
@@ -90,7 +90,7 @@ const AdminLoginPage: React.FC = () => {
 
         if (!values.fname) errors.fname = "First Name is required";
         if (!values.lname) errors.lname = "Last Name is required";
-        
+
         if (!values.email) {
             errors.email = "Email is required";
         } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email.toUpperCase())) {
@@ -104,7 +104,7 @@ const AdminLoginPage: React.FC = () => {
 
     // Submission handler with async/await and explicit typing
     const onSubmit = async (values: FormValues) => {
-        
+
         try {
             const res = await fetch("https://rosegoldgallery-back.onrender.com/api/admin/register", {
                 method: "POST",
@@ -114,7 +114,7 @@ const AdminLoginPage: React.FC = () => {
 
             if (res.ok) {
                 console.log("Registration successful!");
-                router.push("/components/admin/login");
+                router.push("/admin");
             } else {
                 console.error("Registration failed! Server status:", res.status);
             }
@@ -130,46 +130,46 @@ const AdminLoginPage: React.FC = () => {
     });
 
     // --- Handler Functions ---
-    
+
     // Toggle password visibility handler (Simplified)
     const togglePasswordVisibility = useCallback(() => {
         setShowPassword(prev => !prev);
     }, []);
-    
+
     return (
-        <Box sx={{ 
-            backgroundColor: '#f2f4f8', 
-            minHeight: '100vh', 
-            display: 'flex', 
-            justifyContent: 'center', 
+        <Box sx={{
+            backgroundColor: '#f2f4f8',
+            minHeight: '100vh',
+            display: 'flex',
+            justifyContent: 'center',
             alignItems: 'center',
             padding: '2rem 0', // Ensure padding for mobile view
         }}>
-            <Container 
-                maxWidth="sm" 
-                sx={{ 
-                    backgroundColor: '#ffffff', 
+            <Container
+                maxWidth="sm"
+                sx={{
+                    backgroundColor: '#ffffff',
                     padding: { xs: '2rem', sm: '3rem' },
-                    borderRadius: '10px', 
-                    boxShadow: '0px 0px 15px 0px rgba(0, 0, 0, 0.1)', 
-                    display: 'flex', 
-                    flexDirection: 'column', 
+                    borderRadius: '10px',
+                    boxShadow: '0px 0px 15px 0px rgba(0, 0, 0, 0.1)',
+                    display: 'flex',
+                    flexDirection: 'column',
                     alignItems: 'center',
                     marginTop: '2rem',
                     marginBottom: '2rem'
                 }}
             >
-                <Typography 
-                    variant="h4" 
-                    component="h1" 
+                <Typography
+                    variant="h4"
+                    component="h1"
                     sx={{ fontWeight: 'bold', marginBottom: '2rem', color: 'black' }}
                 >
                     Admin Register
                 </Typography>
-                
-                <Box 
-                    component="form" 
-                    onSubmit={formik.handleSubmit} 
+
+                <Box
+                    component="form"
+                    onSubmit={formik.handleSubmit}
                     sx={{ width: '100%', maxWidth: '400px', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}
                 >
                     {/* First Name */}
@@ -248,7 +248,7 @@ const AdminLoginPage: React.FC = () => {
                             ),
                         }}
                     />
-                    
+
                     {/* Role (Read-only or Hidden field for 'admin') */}
                     <WhiteTextField
                         fullWidth
@@ -262,29 +262,27 @@ const AdminLoginPage: React.FC = () => {
                     />
 
                     {/* Submit Button */}
-                    <StyledButton type="submit" variant="contained" fullWidth sx={{ marginTop: '1rem' }}>
+                    <StyledButton type="submit" variant="contained" fullWidth sx={{ marginTop: '1rem' }} >
                         Register
                     </StyledButton>
                 </Box>
-                
+
                 {/* Login Link */}
-                <Box sx={{ display: 'flex', alignItems: 'center', marginTop: '1.5rem', gap: 1 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center',justifyItems:"center", marginTop: '1.5rem', gap: 1 }}>
                     <Typography variant="body2" sx={{ color: 'black' }}>
                         Already Have Admin Account?
                     </Typography>
-                    <Link href="/components/admin/login" passHref legacyBehavior>
-                        {/* FIX: Changed component="a" to as="a" on the StyledButton to fix the type error. */}
-                        <StyledButton as="a" variant="text" sx={{ padding: '0 8px', minWidth: 'auto' }}>
+                    <Link href="/admin" passHref>
+                        <StyledButton variant="contained" fullWidth >
                             Login
                         </StyledButton>
                     </Link>
                 </Box>
 
                 {/* Main Site Link */}
-                <Box sx={{ width: '100%', maxWidth: '400px', marginTop: '2rem' }}>
-                    <Link href="/" passHref legacyBehavior>
-                         {/* FIX: Changed component="a" to as="a" on the StyledButton to fix the type error. */}
-                        <StyledButton as="a" variant="outlined" fullWidth>
+                <Box sx={{ width: '100%', marginTop: '2rem' }}>
+                    <Link href="/" passHref>
+                        <StyledButton variant="contained" fullWidth sx={{ marginTop: '1rem' }}>
                             Go to Main Site
                         </StyledButton>
                     </Link>

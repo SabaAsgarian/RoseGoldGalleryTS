@@ -86,6 +86,7 @@ const HomeShowcase: React.FC = () => {
               justifyContent: "center",
               transition: "all 0.3s ease",
               fontWeight: 500,
+              textAlign: "center",
               "&:hover": {
                 backgroundColor: "black",
                 color: "white",
@@ -163,6 +164,7 @@ const HomeShowcase: React.FC = () => {
               alignItems: "center",
               justifyContent: "center",
               transition: "all 0.3s ease",
+              textAlign: "center",
               fontWeight: 500,
               "&:hover": {
                 backgroundColor: "black",
@@ -170,7 +172,7 @@ const HomeShowcase: React.FC = () => {
               },
             }}
           >
-            Shop Our New Necklaces
+          Shop Our New Necklaces
           </Box>
         </Box>
       </Link>

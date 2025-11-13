@@ -88,66 +88,70 @@ const SamplePrevArrow: React.FC<ArrowProps> = ({ onClick, isHovering }) => (
 // ---------- Slider Component ----------
 const ReactSlick: React.FC = () => {
   const [isHovering, setIsHovering] = useState(false);
-  const [windowWidth, setWindowWidth] = useState<number>(0);
+  const [slidesToShow, setSlidesToShow] = useState(5);
+  const [key, setKey] = useState(0);
 
-  // ✅ برای درست ماندن وضعیت بعد از رفرش
+  // ✅ ریسپانسیو واقعی با حفظ وضعیت بعد از رفرش
   useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    handleResize(); // run on mount
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  useEffect(() => {
-    const sliderContainer = document.querySelector(".slider-container");
-    if (!sliderContainer) return;
-
-    const handleEnter = () => setIsHovering(true);
-    const handleLeave = () => setIsHovering(false);
-
-    sliderContainer.addEventListener("mouseenter", handleEnter);
-    sliderContainer.addEventListener("mouseleave", handleLeave);
-
-    return () => {
-      sliderContainer.removeEventListener("mouseenter", handleEnter);
-      sliderContainer.removeEventListener("mouseleave", handleLeave);
+    const calcSlides = () => {
+      const width = window.innerWidth;
+      if (width >= 1024) return 5;
+      if (width >= 768) return 3;
+      if (width >= 480) return 2;
+      return 1;
     };
+
+    const updateSlides = () => {
+      setSlidesToShow(calcSlides());
+      setKey((prev) => prev + 1); // ری‌ماینت اسلایدر برای sync کامل
+    };
+
+    updateSlides(); // در رفرش
+    window.addEventListener("resize", updateSlides);
+    return () => window.removeEventListener("resize", updateSlides);
   }, []);
 
   const slides: { img: StaticImageData; link: string }[] = [
-    { img: a, link: "../pages/necklace" },
-    { img: b, link: "../pages/necklace" },
-    { img: c, link: "../pages/necklace" },
-    { img: d, link: "../pages/rings" },
-    { img: e, link: "../pages/necklace" },
-    { img: f, link: "../pages/necklace" },
-    { img: g, link: "../pages/necklace" },
-    { img: h, link: "../pages/rings" },
-    { img: i, link: "../pages/bracelet" },
-    { img: j, link: "../pages/rings" },
-    { img: k, link: "../pages/earings" },
-    { img: l, link: "../pages/necklace" },
-    { img: m, link: "../pages/bracelet" },
+    { img: a, link: "/pages/necklace" },
+    { img: b, link: "/pages/necklace" },
+    { img: c, link: "/pages/necklace" },
+    { img: d, link: "/pages/rings" },
+    { img: e, link: "/pages/necklace" },
+    { img: f, link: "/pages/necklace" },
+    { img: g, link: "/pages/necklace" },
+    { img: h, link: "/pages/rings" },
+    { img: i, link: "/pages/bracelet" },
+    { img: j, link: "/pages/rings" },
+    { img: k, link: "/pages/earings" },
+    { img: l, link: "/pages/necklace" },
+    { img: m, link: "/pages/bracelet" },
   ];
 
   const settings = {
     dots: true,
     infinite: false,
     speed: 500,
-    slidesToShow:
-      windowWidth >= 1024 ? 5 : windowWidth >= 600 ? 3 : windowWidth >= 480 ? 2 : 1,
-    slidesToScroll:
-      windowWidth >= 1024 ? 5 : windowWidth >= 600 ? 3 : windowWidth >= 480 ? 2 : 1,
+    slidesToShow,
+    slidesToScroll: slidesToShow,
     nextArrow: <SampleNextArrow isHovering={isHovering} />,
     prevArrow: <SamplePrevArrow isHovering={isHovering} />,
     adaptiveHeight: true,
   };
 
   return (
-    <div className="slider-container" style={{ position: "relative", padding: "0 10px" }}>
-     <Slider key={windowWidth} {...(settings as any)}>
+    <div
+      className="slider-container"
+      style={{ position: "relative", padding: "0 10px" }}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+    >
+      <Slider key={key} {...(settings as any)}>
         {slides.map((slide, index) => (
-          <div key={index} className="bg-white mix-blend-multiply" style={{ margin: "0 10px" }}>
+          <div
+            key={index}
+            className="bg-white mix-blend-multiply"
+            style={{ margin: "0 10px" }}
+          >
             <div
               key={`inner-${index}`}
               className="bg-[#faf7f1] mix-blend-multiply"
@@ -163,6 +167,8 @@ const ReactSlick: React.FC = () => {
                     backgroundColor: "#faf7f1",
                     mixBlendMode: "multiply",
                     width: "100%",
+                   
+                    transition: "transform 0.3s ease, box-shadow 0.3s ease",
                   }}
                   placeholder="blur"
                 />

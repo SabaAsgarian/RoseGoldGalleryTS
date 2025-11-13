@@ -76,11 +76,10 @@ const SamplePrevArrow: React.FC<ArrowProps> = ({ onClick, isHovering }) => (
 
 const ResponsiveSlider: React.FC = () => {
   const [isHovering, setIsHovering] = useState(false);
-  const [slidesToShow, setSlidesToShow] = useState(5); // default (desktop)
-  const [isMounted, setIsMounted] = useState(false);
+  const [slidesToShow, setSlidesToShow] = useState<number>(5);
+
   const images: StaticImageData[] = [a, b, c, d, e, f];
 
-  // Detect screen width on client
   useEffect(() => {
     const updateSlides = () => {
       const width = window.innerWidth;
@@ -90,14 +89,11 @@ const ResponsiveSlider: React.FC = () => {
       else setSlidesToShow(5);
     };
 
-    updateSlides(); // Run once on mount
+    updateSlides(); // Run immediately on mount
     window.addEventListener("resize", updateSlides);
-    setIsMounted(true);
 
     return () => window.removeEventListener("resize", updateSlides);
   }, []);
-
-  if (!isMounted) return null; // prevents SSR mismatch
 
   const settings = {
     dots: false,

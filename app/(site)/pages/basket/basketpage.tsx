@@ -138,7 +138,7 @@ const CartPage: React.FC = () => {
               <TableRow key={val.id}>
                 <TableCell>
                   <img
-                    src={`https://rosegoldgallery-back.onrender.com/${val.img}`}
+                    src={`https://rosegoldgallerybackend.onrender.com/${val.img}`}
                     alt={val.title}
                     style={{
                       width: "50px",

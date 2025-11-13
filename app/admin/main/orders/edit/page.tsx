@@ -59,7 +59,7 @@ const Page: React.FC = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `https://rosegoldgallery-back.onrender.com/api/orders/${id}`,
+        `https://rosegoldgallerybackend.onrender.com/api/orders/${id}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -83,7 +83,7 @@ const Page: React.FC = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `https://rosegoldgallery-back.onrender.com/api/orders/${id}`,
+        `https://rosegoldgallerybackend.onrender.com/api/orders/${id}`,
         {
           method: "PUT",
           headers: {

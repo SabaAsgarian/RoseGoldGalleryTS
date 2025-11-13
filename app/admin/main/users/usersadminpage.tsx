@@ -118,7 +118,7 @@ const StyledButton = styled(Button)({
 // --- Helper Functions ---
 
 const loadPage = (setData: SetDataFunction) => {
-  fetch('https://rosegoldgallery-back.onrender.com/api/user')
+  fetch('https://rosegoldgallerybackend.onrender.com/api/user')
     .then(res => {
       if (!res.ok) {
         throw new Error('Failed to load data');
@@ -155,7 +155,7 @@ function Row({ val, loadPage }: RowProps) {
       return;
     }
     if (window.confirm('Are you sure you want to delete this user?')) {
-      fetch(`https://rosegoldgallery-back.onrender.com/api/user/${val._id}`, {
+      fetch(`https://rosegoldgallerybackend.onrender.com/api/user/${val._id}`, {
         method: 'DELETE',
       })
         .then((res) => {
@@ -182,7 +182,7 @@ function Row({ val, loadPage }: RowProps) {
       return;
     }
 
-    fetch(`https://rosegoldgallery-back.onrender.com/api/user/${val._id}`, {
+    fetch(`https://rosegoldgallerybackend.onrender.com/api/user/${val._id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newData),
@@ -323,7 +323,7 @@ export default function UsersPage() {
       return;
     }
 
-    const url = 'https://rosegoldgallery-back.onrender.com/api/user';
+    const url = 'https://rosegoldgallerybackend.onrender.com/api/user';
     fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

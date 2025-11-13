@@ -106,7 +106,7 @@ const AdminLoginPage: React.FC = () => {
     const onSubmit = async (values: FormValues) => {
 
         try {
-            const res = await fetch("https://rosegoldgallery-back.onrender.com/api/admin/register", {
+            const res = await fetch("https://rosegoldgallerybackend.onrender.com/api/admin/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(values),

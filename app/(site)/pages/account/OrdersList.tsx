@@ -27,7 +27,7 @@ export default function OrdersList() {
       setLoading(true);
       try {
         const response = await fetch(
-          'https://rosegoldgallery-back.onrender.com/api/orders/user'
+          'https://rosegoldgallerybackend.onrender.com/api/orders/user'
         );
         const data: Order[] = await response.json();
         setOrders(data);

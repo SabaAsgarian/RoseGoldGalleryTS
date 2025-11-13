@@ -33,7 +33,7 @@ export default function ManageProducts() {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    fetch("https://rosegoldgallery-back.onrender.com/api/products")
+    fetch("https://rosegoldgallerybackend.onrender.com/api/products")
       .then((res) => {
         if (!res.ok) {
           throw new Error('Failed to fetch products');

@@ -102,7 +102,7 @@ const useStore = create<StoreState>((set, get) => ({
     const state = get();
     try {
       const response = await fetch(
-        "https://rosegoldgallery-back.onrender.com/api/orders",
+        "https://rosegoldgallerybackend.onrender.com/api/orders",
         {
           method: "POST",
           headers: {

@@ -110,7 +110,7 @@ type FormValues = Omit<Yup.InferType<typeof validationSchema>, 'age'> & {
 // --- 4. UTILITY FUNCTIONS ---
 
 // Define API_BASE_URL (using environment variable from Next.js)
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://rosegoldgallery-back.onrender.com'
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://rosegoldgallerybackend.onrender.com'
 
 // Add this function to check if token is expired
 const isTokenExpired = (token: string): boolean => {

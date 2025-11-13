@@ -36,7 +36,7 @@ function EditProductContent() {
 
   useEffect(() => {
     if (!id) return;
-    fetch(`https://rosegoldgallery-back.onrender.com/api/products`)
+    fetch(`https://rosegoldgallerybackend.onrender.com/api/products`)
       .then((res) => res.json())
       .then((data: Product[]) => {
         const item = data.find((p) => p._id === id);
@@ -64,7 +64,7 @@ function EditProductContent() {
     if (!id) return;
     try {
       const res = await fetch(
-        `https://rosegoldgallery-back.onrender.com/api/products/${id}`,
+        `https://rosegoldgallerybackend.onrender.com/api/products/${id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },

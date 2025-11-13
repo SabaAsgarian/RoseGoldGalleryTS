@@ -73,7 +73,7 @@ const VisuallyHiddenInput = styled("input")({
 
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL ||
-  "https://rosegoldgallery-back.onrender.com";
+  "https://rosegoldgallerybackend.onrender.com";
 
 // ---------- Component ----------
 const UserRegister: React.FC = () => {

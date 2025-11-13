@@ -51,7 +51,7 @@ const MultiActionAreaCard: React.FC<MultiActionAreaCardProps> = ({ data }) => {
           >
             <CardMedia
               component="img"
-              image={`https://rosegoldgallery-back.onrender.com/${data.img}`}
+              image={`https://rosegoldgallerybackend.onrender.com/${data.img}`}
               alt={data.category}
               style={{
                 backgroundColor: "#faf7f1",

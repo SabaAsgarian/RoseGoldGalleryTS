@@ -143,7 +143,7 @@ export default function EditOrderPage({ params }: EditOrderPageProps) {
       console.log('Fetching order with ID:', orderId);
 
       const response = await fetch(
-        `https://rosegoldgallery-back.onrender.com/api/orders/${orderId}`,
+        `https://rosegoldgallerybackend.onrender.com/api/orders/${orderId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -193,7 +193,7 @@ export default function EditOrderPage({ params }: EditOrderPageProps) {
       }
 
       const response = await fetch(
-        `https://rosegoldgallery-back.onrender.com/api/orders/${orderId}`,
+        `https://rosegoldgallerybackend.onrender.com/api/orders/${orderId}`,
         {
           method: 'PUT',
           headers: {
@@ -569,7 +569,7 @@ export default function EditOrderPage({ params }: EditOrderPageProps) {
                                     <TableCell>
                                       {item.img && (
                                         <img
-                                          src={`https://rosegoldgallery-back.onrender.com/${item.img}`}
+                                          src={`https://rosegoldgallerybackend.onrender.com/${item.img}`}
                                           alt={item.name}
                                           style={{
                                             width: '50px',

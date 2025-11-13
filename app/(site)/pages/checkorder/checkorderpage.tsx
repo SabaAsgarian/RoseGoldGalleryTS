@@ -93,7 +93,7 @@ export default function CheckOrder() {
         }
       };
 
-      const response = await fetch('https://rosegoldgallery-back.onrender.com/api/orders', {
+      const response = await fetch('https://rosegoldgallerybackend.onrender.com/api/orders', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -169,7 +169,7 @@ export default function CheckOrder() {
                     <TableCell>
                       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                         <img
-                          src={`https://rosegoldgallery-back.onrender.com/${item.img}`}
+                          src={`https://rosegoldgallerybackend.onrender.com/${item.img}`}
                           alt={item.name}
                           style={{ width: 50, height: 50, objectFit: 'cover' }}
                         />

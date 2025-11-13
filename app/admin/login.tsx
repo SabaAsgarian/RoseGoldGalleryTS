@@ -67,7 +67,7 @@ const StyledButton = styled(Button)({
   }
 });
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://rosegoldgallery-back.onrender.com';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://rosegoldgallerybackend.onrender.com';
 
 function AdminLoginPage() {
   const router = useRouter();

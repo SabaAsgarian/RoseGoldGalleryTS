@@ -77,7 +77,7 @@ export default function AddProduct() {
             Object.keys(values).forEach(key => formData.append(key, (values as any)[key]));
             formData.append("img", selectedFile);
 
-            const res = await fetch("https://rosegoldgallery-back.onrender.com/api/products", {
+            const res = await fetch("https://rosegoldgallerybackend.onrender.com/api/products", {
                 method: "POST",
                 body: formData,
             });

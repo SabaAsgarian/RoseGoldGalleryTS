@@ -24,7 +24,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
 
 const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL || 'https://rosegoldgallery-back.onrender.com'
+  process.env.NEXT_PUBLIC_API_URL || 'https://rosegoldgallerybackend.onrender.com'
 
 const StyledForm = styled('form')({
   display: 'flex',

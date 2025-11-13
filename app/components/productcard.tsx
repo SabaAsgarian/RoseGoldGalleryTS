@@ -49,7 +49,7 @@ const Cardd: React.FC<CarddProps> = ({ data, onDelete }) => {
     );
     if (confirmDelete) {
       const res = await fetch(
-        `https://rosegoldgallery-back.onrender.com/api/products/${data._id}`,
+        `https://rosegoldgallerybackend.onrender.com/api/products/${data._id}`,
         {
           method: "DELETE",
         }
@@ -70,7 +70,7 @@ const Cardd: React.FC<CarddProps> = ({ data, onDelete }) => {
           >
             <CardMedia
               component="img"
-              image={`https://rosegoldgallery-back.onrender.com/${data.img}`}
+              image={`https://rosegoldgallerybackend.onrender.com/${data.img}`}
               alt={data.category || "Product image"}
               style={{
                 backgroundColor: "#faf7f1",

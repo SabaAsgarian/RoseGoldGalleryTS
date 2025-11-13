@@ -101,7 +101,7 @@ const Page: React.FC = () => {
       }
 
       const response = await fetch(
-        "https://rosegoldgallery-back.onrender.com/api/orders/all",
+        "https://rosegoldgallerybackend.onrender.com/api/orders/all",
         {
           method: "GET",
           headers: {
@@ -144,7 +144,7 @@ const Page: React.FC = () => {
       }
 
       const response = await fetch(
-        `https://rosegoldgallery-back.onrender.com/api/orders/${id}`,
+        `https://rosegoldgallerybackend.onrender.com/api/orders/${id}`,
         {
           method: "DELETE",
           headers: {

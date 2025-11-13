@@ -23,7 +23,7 @@ interface Product {
 // 🛰️ Fetch function with ISR (Incremental Static Regeneration)
 async function getData(): Promise<Product[]> {
   const res = await fetch(
-    "https://rosegoldgallery-back.onrender.com/api/category/earings",
+    "https://rosegoldgallerybackend.onrender.com/api/category/earings",
     { next: { revalidate: 60 } }
   );
 

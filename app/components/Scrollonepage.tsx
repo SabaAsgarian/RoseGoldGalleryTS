@@ -15,7 +15,7 @@ const MediaBox: React.FC = () => {
   return (
     <Box sx={{ width: "100%", height: "auto" }}>
       <Link href="../pages/all" style={{ color: "black", textDecoration: "none" }}>
-        <Box sx={{ width: "100%", position: "relative", minHeight: "400px" }}>
+        <Box sx={{ width: "100%", position: "relative" }}>
           {!gifFailed ? (
             <Image
               src="/Vid/vid.gif"

@@ -24,7 +24,7 @@ const MediaBox: React.FC = () => {
               priority
               sizes="100vw"
               onError={handleGifError}
-              style={{ objectFit: "cover" }}
+              
             />
           ) : (
             <video

@@ -20,7 +20,7 @@ const HomeShowcase: React.FC = () => {
       }}
     >
       {/* ===== Left Side (Earrings) ===== */}
-      <Link href="../pages/necklace" passHref>
+      <Link href="../pages/earings" passHref>
         <Box
           sx={{
             cursor: "pointer",
@@ -99,7 +99,7 @@ const HomeShowcase: React.FC = () => {
       </Link>
 
       {/* ===== Right Side (Necklaces) ===== */}
-      <Link href="../pages/earings" passHref>
+      <Link href="../pages/necklace" passHref>
         <Box
           sx={{
             cursor: "pointer",

@@ -106,7 +106,7 @@ const LastSection: React.FC = () => {
           </Box>
 
           <Link
-            href="./components/shop"
+            href="./pages/all"
             style={{
               color: "black",
               margin: "0 10px",

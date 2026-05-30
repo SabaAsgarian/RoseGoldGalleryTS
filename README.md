@@ -3,9 +3,6 @@
 
  
 
-
-
-
 - 📽[Demo Project](https://rose-gold-gallery-ts.vercel.app/)📽
 - 👩‍💻Developed by Saba Asgarian👩‍💻
 
